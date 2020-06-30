@@ -1,0 +1,42 @@
+
+server:
+  port: 9290
+
+spring:
+  profiles:
+    active: dev # dev test prod
+  application:
+    name: @project.name@
+    version: @project.version@
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      discovery:
+        locator:
+          # 让gateway通过服务发现组件找到其他的微服务
+          enabled: true
+      routes:
+        - id: auth_route
+          uri: lb://mall-auth
+          predicates:
+            - Path=/auth/**
+        - id: user_route
+          uri: lb://mall-user
+          predicates:
+            - Path=/users/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org.springframework.cloud.gateway: trace

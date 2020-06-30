@@ -1,0 +1,36 @@
+<!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="generator/config.properties"/>
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.user}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+
+        <!--实体-->
+        <javaModelGenerator targetPackage="com.aidansu.mall.user.entity.${moduleName}"
+                            targetProject="src/main/java"/>
+
+        <!--mapper.xml-->
+        <sqlMapGenerator targetPackage="om.aidansu.mall.user.dao.${moduleName}"
+                         targetProject="src/main/resources"/>
+
+        <!--mapper接口-->
+        <javaClientGenerator targetPackage="om.aidansu.mall.user.dao.${moduleName}"
+                             targetProject="src/main/java"
+                             type="XMLMAPPER"/>
+
+        <!--为哪张表生成代码-->
+        <table tableName="${tableName}">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+    </context>
+</generatorConfiguration>

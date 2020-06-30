@@ -1,0 +1,46 @@
+
+server:
+  port: 9292
+
+spring:
+  profiles:
+    active: dev # dev test prod
+  application:
+    name: @project.name@
+    version: @project.version@
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: mysql
+    url: jdbc:mysql://localhost:3306/mall_wechat?characterEncoding=utf-8&useSSL=false
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      filter:
+        # 打开/关闭掉对Spring MVC端点的保护
+        enabled: true
+      transport:
+        # 指定sentinel 控制台的地址
+        dashboard: localhost:1001
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    # 控制台日志配置
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mappers/*.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+wechat:
+  miniAppId: wx37b3f537d5623dd6
+  miniAppSecret: ba16d52bdd1db70c4ae7a068cb507733

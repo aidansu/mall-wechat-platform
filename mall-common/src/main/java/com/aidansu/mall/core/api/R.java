@@ -40,19 +40,19 @@ public class R<T> implements Serializable {
 	@ApiModelProperty(value = "请求路径", required = true)
 	private String path;
 
-	private R(IResultCode resultCode) {
+	private R(ResultCode resultCode) {
 		this(resultCode, null, resultCode.getMessage());
 	}
 
-	private R(IResultCode resultCode, String msg) {
+	private R(ResultCode resultCode, String msg) {
 		this(resultCode, null, msg);
 	}
 
-	private R(IResultCode resultCode, T data) {
+	private R(ResultCode resultCode, T data) {
 		this(resultCode, data, resultCode.getMessage());
 	}
 
-	private R(IResultCode resultCode, T data, String msg) {
+	private R(ResultCode resultCode, T data, String msg) {
 		this(resultCode.getCode(), data, msg);
 	}
 
@@ -142,7 +142,7 @@ public class R<T> implements Serializable {
 	 * @param <T> T 泛型标记
 	 * @return R
 	 */
-	public static <T> R<T> success(IResultCode resultCode) {
+	public static <T> R<T> success(ResultCode resultCode) {
 		return new R<>(resultCode);
 	}
 
@@ -154,7 +154,7 @@ public class R<T> implements Serializable {
 	 * @param <T>  T 泛型标记
 	 * @return R
 	 */
-	public static <T> R<T> success(IResultCode resultCode, String msg) {
+	public static <T> R<T> success(ResultCode resultCode, String msg) {
 		return new R<>(resultCode, msg);
 	}
 
@@ -189,7 +189,7 @@ public class R<T> implements Serializable {
 	 * @param <T> T 泛型标记
 	 * @return R
 	 */
-	public static <T> R<T> fail(IResultCode resultCode) {
+	public static <T> R<T> fail(ResultCode resultCode) {
 		return new R<>(resultCode);
 	}
 
@@ -201,7 +201,7 @@ public class R<T> implements Serializable {
 	 * @param <T> T 泛型标记
 	 * @return R
 	 */
-	public static <T> R<T> fail(IResultCode resultCode, String msg) {
+	public static <T> R<T> fail(ResultCode resultCode, String msg) {
 		return new R<>(resultCode, msg);
 	}
 

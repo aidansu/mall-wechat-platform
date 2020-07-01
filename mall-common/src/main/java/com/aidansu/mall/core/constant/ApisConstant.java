@@ -35,5 +35,9 @@ public interface ApisConstant {
      * 流控/降级
      */
     String FLOW_CONTROL_DOWNGRADE = "流控/降级";
+    /**
+     * 用户名或密码错误
+     */
+    String USERNAME_OR_PASSWORD_ERROR = "用户名或密码错误";
 
 }

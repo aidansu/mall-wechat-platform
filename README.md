@@ -59,6 +59,13 @@ MybatisX Plugin
 
 ## 环境搭建
 ### *  **创建数据库**
-```bash
+```
 CREATE DATABASE `mall_wechat` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+```
+
+### *  **默认账号密码**
+```
+tenantId: 000000
+username: admin
+password: 123456
 ```

@@ -22,6 +22,8 @@ public interface TokenConstant {
 
 	String HEADER = "Authorization";
 	String BEARER = "bearer";
+	Integer AUTH_LENGTH = 7;
+
 	String ACCESS_TOKEN = "access_token";
 	String REFRESH_TOKEN = "refresh_token";
 	String TOKEN_TYPE = "token_type";

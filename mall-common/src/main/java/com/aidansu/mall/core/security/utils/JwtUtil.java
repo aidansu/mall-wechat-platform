@@ -6,7 +6,7 @@ import com.aidansu.mall.core.security.TokenInfo;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -107,7 +107,6 @@ public class JwtUtil {
 				.setHeaderParam("typ", "JWT")
 				.setClaims(claims)
 				.setIssuedAt(now)
-				// 支持的算法详见：https://github.com/jwtk/jjwt#features
 				.signWith(signingKey, signatureAlgorithm);
 
 		//添加Token过期时间

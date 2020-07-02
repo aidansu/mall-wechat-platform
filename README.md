@@ -35,6 +35,7 @@ HTTP客户端：Feign
 ```
 mall-wechat-platform
 ├── mall-auth -- 认证授权系统
+├── mall-common -- 常用工具共用模块
 ├── mall-gateway -- 网关系统
 ├── mall-user -- 用户系统
 ```

@@ -1,4 +1,4 @@
-package com.aidansu.mall.user.common;
+package com.aidansu.mall.user.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

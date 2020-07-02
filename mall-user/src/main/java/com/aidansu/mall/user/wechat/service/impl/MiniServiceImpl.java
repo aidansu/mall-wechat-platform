@@ -1,7 +1,7 @@
 package com.aidansu.mall.user.wechat.service.impl;
 
 import com.aidansu.mall.core.error.ApisException;
-import com.aidansu.mall.user.common.WechatAccountConfig;
+import com.aidansu.mall.user.config.WechatAccountConfig;
 import com.aidansu.mall.user.wechat.entity.UserSession;
 import com.aidansu.mall.user.wechat.service.MiniService;
 import com.alibaba.fastjson.JSON;

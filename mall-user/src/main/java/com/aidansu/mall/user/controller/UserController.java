@@ -3,7 +3,7 @@ package com.aidansu.mall.user.controller;
 import com.aidansu.mall.core.api.R;
 import com.aidansu.mall.core.api.ResultCode;
 import com.aidansu.mall.core.security.JwtUser;
-import com.aidansu.mall.core.security.auth.CheckLogin;
+import com.aidansu.mall.core.security.auth.PreAuth;
 import com.aidansu.mall.core.security.exception.SecureException;
 import com.aidansu.mall.core.security.utils.JwtUtil;
 import com.aidansu.mall.user.dto.AdminUserLoginDTO;
@@ -33,7 +33,18 @@ public class UserController {
     @Resource
     private IUserService userService;
 
-    @CheckLogin
+    @PreAuth("ROLE_ADMIN")
+    @GetMapping("/{id}")
+    public R<User> findById(@PathVariable Long id) {
+        return R.data(this.userService.findById(id));
+    }
+
+    @PreAuth("ROLE_ADMIN")
+    @GetMapping("/mini-openid/{openid}")
+    public R<User> findByOpenid(@PathVariable String openid) {
+        return R.data(this.userService.findByMiniOpenid(openid));
+    }
+
     @GetMapping("/detail")
     public R<User> detail() {
         // 通过token获取用户ID，再通过用户ID获取用户详细信息

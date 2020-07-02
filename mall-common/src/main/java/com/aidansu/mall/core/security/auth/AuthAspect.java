@@ -10,9 +10,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * AOP 鉴权
@@ -31,46 +36,55 @@ public class AuthAspect {
 	 * @throws Throwable 没有权限的异常
 	 */
 	@Around(
-			"@annotation(com.aidansu.mall.core.security.auth.CheckLogin) || " +
-					"@within(com.aidansu.mall.core.security.auth.CheckLogin)"
+			"@annotation(com.aidansu.mall.core.security.auth.PreAuth) || " +
+					"@within(com.aidansu.mall.core.security.auth.PreAuth)"
 	)
-	public Object CheckLogin(ProceedingJoinPoint point) throws Throwable {
-		if (checkToken()) {
+	public Object preAuth(ProceedingJoinPoint point) throws Throwable {
+		if (handleAuth(point)) {
 			return point.proceed();
 		}
 		throw new SecureException(ResultCode.UN_AUTHORIZED);
 	}
 
-
-	private boolean checkToken() {
+	/**
+	 * 处理权限
+	 *
+	 * @param point 切点
+	 */
+	private boolean handleAuth(ProceedingJoinPoint point) {
 		try {
-			// 1. 从header里面获取token
 			HttpServletRequest request = WebUtil.getRequest();
 			if(request == null){
 				return false;
 			}
-			String token = JwtUtil.getToken(request);
-			if(StringUtils.isBlank(token)){
-				return false;
+
+			List<String> authorities = new ArrayList<>();
+			Object obj  = request.getAttribute(TokenConstant.AUTHORITIES);
+			if (obj  instanceof ArrayList<?>) {
+				for (Object o : (List<?>) obj ) {
+					authorities.add((String) o);
+				}
 			}
 
-			// 2. 校验token是否合法&是否过期；如果不合法或已过期直接抛异常；如果合法放行
-			Boolean isValid = JwtUtil.validateToken(token);
-			if (!isValid) {
-				throw new SecureException(ResultCode.TOKEN_ILLEGAL);
+			MethodSignature signature = (MethodSignature) point.getSignature();
+			Method method = signature.getMethod();
+			PreAuth annotation = method.getAnnotation(PreAuth.class);
+
+			String value = annotation.value();
+
+			for(String role: authorities){
+				if(Objects.equals(role, value)){
+					return true;
+				}
 			}
-
-			// 3. 如果校验成功，那么就将用户的信息设置到request的attribute里面
-			Claims claims = JwtUtil.getClaimsFromToken(token);
-			request.setAttribute(TokenConstant.TENANT_ID, claims.get(TokenConstant.TENANT_ID));
-			request.setAttribute(TokenConstant.USER_ID, claims.get(TokenConstant.USER_ID));
-			request.setAttribute(TokenConstant.NICK_NAME, claims.get(TokenConstant.NICK_NAME));
-			request.setAttribute(TokenConstant.AUTHORITIES, claims.get(TokenConstant.AUTHORITIES));
-
-			return true;
 		} catch (Throwable throwable) {
-			throw new SecureException(ResultCode.TOKEN_ILLEGAL);
+			throw new SecureException(ResultCode.UN_AUTHORIZED,throwable);
 		}
+		return false;
+
 	}
+
+
+
 
 }

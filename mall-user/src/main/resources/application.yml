@@ -44,3 +44,10 @@ management:
 wechat:
   miniAppId: wx37b3f537d5623dd6
   miniAppSecret: ba16d52bdd1db70c4ae7a068cb507733
+
+mall:
+  secure:
+    url:
+      exclude-patterns:
+        - /users/login/mini
+        - /users/login/username

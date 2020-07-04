@@ -9,6 +9,7 @@ import com.aidansu.mall.user.entity.User;
 import com.aidansu.mall.user.service.IUserService;
 import com.aidansu.mall.user.wechat.entity.UserSession;
 import com.aidansu.mall.user.wechat.service.MiniService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -23,27 +24,27 @@ import java.time.LocalDateTime;
  * @author aidan
  */
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
-	@Resource
-	private UserMapper userMapper;
+//	@Resource
+//	private UserMapper userMapper;
 
 	@Resource
 	private MiniService miniService;
 
 	@Override
 	public User findById(Long id) {
-		return userMapper.selectByPrimaryKey(id);
+		return baseMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
 	public User findByMiniOpenid(String miniOpenid) {
-		return userMapper.selectByMiniOpenid(miniOpenid);
+		return baseMapper.selectByMiniOpenid(miniOpenid);
 	}
 
 	@Override
 	public User findByUnionid(String unionid) {
-		return userMapper.selectByUnionid(unionid);
+		return baseMapper.selectByUnionid(unionid);
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class UserServiceImpl implements IUserService {
 
 		LocalDateTime now = LocalDateTime.now();
 		// 通过openid查找该用户是否存在
-		User user = userMapper.selectByMiniOpenid(userSession.getOpenid());
+		User user = baseMapper.selectByMiniOpenid(userSession.getOpenid());
 		// 如果不存在就新增用户，否则更新用户信息
 		if(user == null){
 			user = User.builder()
@@ -77,7 +78,7 @@ public class UserServiceImpl implements IUserService {
 					.status(1)
 					.isDeleted(0)
 					.build();
-			this.userMapper.insertSelective(user);
+			this.baseMapper.insertSelective(user);
 		}else{
 			if(StringUtils.isNotBlank(dto.getPhone())){
 				user.setPhone(dto.getPhone());
@@ -108,14 +109,14 @@ public class UserServiceImpl implements IUserService {
 			}
 			user.setUpdateTime(now);
 			user.setLastLoginTime(now);
-			this.userMapper.updateByPrimaryKeySelective(user) ;
+			this.baseMapper.updateByPrimaryKeySelective(user) ;
 		}
 		return user;
 	}
 
 	@Override
 	public User loginByUsername(AdminUserLoginDTO dto) {
-		User user = userMapper.selectByUsernameAndTenantId(dto.getUsername(),dto.getTenantId());
+		User user = baseMapper.selectByUsernameAndTenantId(dto.getUsername(),dto.getTenantId());
 		if (user == null) {
 			//用户不存在（返回：用户名或密码错误 ）
 			throw new ApisException(ApisConstant.USERNAME_OR_PASSWORD_ERROR);
@@ -133,6 +134,6 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public boolean deletedById(Long id) {
-		return userMapper.deleteByPrimaryKey(id) == 1;
+		return baseMapper.deleteByPrimaryKey(id) == 1;
 	}
 }

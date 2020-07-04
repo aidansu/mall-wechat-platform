@@ -2,14 +2,16 @@ package com.aidansu.mall.user.service;
 
 import com.aidansu.mall.user.dto.AdminUserLoginDTO;
 import com.aidansu.mall.user.dto.WechatUserLoginDTO;
+import com.aidansu.mall.user.entity.ShippingAddress;
 import com.aidansu.mall.user.entity.User;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 用户服务类
  *
  * @author aidansu
  */
-public interface IUserService {
+public interface IUserService extends IService<User> {
 
 	/**
 	 * 通过用户id查找用户信息

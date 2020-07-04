@@ -9,7 +9,9 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @author aidansu
+ * 用户信息 视图实体类
+ *
+ * @author aidan
  */
 @Data
 @Builder

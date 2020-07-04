@@ -1,14 +1,14 @@
 package com.aidansu.mall.user.dao;
 
-
 import com.aidansu.mall.user.entity.User;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * 用户 Mapper 接口
  *
  * @author aidansu
  */
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
 
     User selectByPrimaryKey(Long id);
 

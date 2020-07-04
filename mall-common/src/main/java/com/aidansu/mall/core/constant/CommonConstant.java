@@ -21,4 +21,17 @@ public interface CommonConstant {
      * 默认时间格式
      */
     String DEFAULT_DATA_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    /**
+     * 开发环境
+     */
+    String DEV_CODE = "dev";
+    /**
+     * 生产环境
+     */
+    String PROD_CODE = "prod";
+    /**
+     * 测试环境
+     */
+    String TEST_CODE = "test";
 }

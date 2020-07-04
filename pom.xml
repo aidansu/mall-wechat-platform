@@ -60,12 +60,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Apache Commons-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-
         <!-- Swagger -->
         <dependency>
             <groupId>io.springfox</groupId>

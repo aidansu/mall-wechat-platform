@@ -2,14 +2,14 @@ package com.aidansu.mall.core.security.utils;
 
 import com.aidansu.mall.core.api.ResultCode;
 import com.aidansu.mall.core.constant.TokenConstant;
-import com.aidansu.mall.core.security.JwtUser;
+import com.aidansu.mall.core.security.AuthUserDetails;
 import com.aidansu.mall.core.security.TokenInfo;
 import com.aidansu.mall.core.security.exception.SecureException;
+import com.aidansu.mall.core.utils.StringUtil;
 import com.aidansu.mall.core.utils.WebUtil;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -27,7 +27,7 @@ import java.util.Map;
  * @author aidan
  */
 @Slf4j
-public class JwtUtil {
+public class JwtTokenUtil {
 
 	/**
 	 * 从token中获取claim
@@ -138,7 +138,7 @@ public class JwtUtil {
 	 *
 	 * @return jwtUser
 	 */
-	public static JwtUser getUser(HttpServletRequest request) {
+	public static AuthUserDetails getUser(HttpServletRequest request) {
 		Claims claims = getClaims(request);
 		if (claims == null) {
 			return null;
@@ -155,7 +155,7 @@ public class JwtUtil {
 			}
 		}
 
-		return JwtUser.builder()
+		return AuthUserDetails.builder()
 				.tenantId(tenantId)
 				.userId(userId)
 				.nickName(nickName)
@@ -167,13 +167,14 @@ public class JwtUtil {
 	 *
 	 * @return jwtUser
 	 */
-	public static JwtUser getUser() {
+	public static AuthUserDetails getUser() {
 		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
 		if(requestAttributes != null) {
 			HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
 			return getUser(request);
+		}else{
+			throw new SecureException(ResultCode.UN_AUTHORIZED);
 		}
-		return null;
 	}
 
 	/**
@@ -184,8 +185,8 @@ public class JwtUtil {
 	 */
 	public static Claims getClaims(HttpServletRequest request) {
 		String token = getToken(request);
-		if(StringUtils.isNotBlank(token)){
-			return JwtUtil.getClaimsFromToken(token);
+		if(StringUtil.isNotBlank(token)){
+			return JwtTokenUtil.getClaimsFromToken(token);
 		}
 		return null;
 	}
@@ -215,19 +216,19 @@ public class JwtUtil {
 			if(request == null){
 				return false;
 			}
-			String token = JwtUtil.getToken(request);
-			if(StringUtils.isBlank(token)){
+			String token = JwtTokenUtil.getToken(request);
+			if(StringUtil.isBlank(token)){
 				return false;
 			}
 
 			// 2. 校验token是否合法&是否过期；如果不合法或已过期直接抛异常；如果合法放行
-			Boolean isValid = JwtUtil.validateToken(token);
+			Boolean isValid = JwtTokenUtil.validateToken(token);
 			if (!isValid) {
 				throw new SecureException(ResultCode.TOKEN_ILLEGAL);
 			}
 
 			// 3. 如果校验成功，那么就将用户的信息设置到request的attribute里面
-			Claims claims = JwtUtil.getClaimsFromToken(token);
+			Claims claims = JwtTokenUtil.getClaimsFromToken(token);
 			request.setAttribute(TokenConstant.TENANT_ID, claims.get(TokenConstant.TENANT_ID));
 			request.setAttribute(TokenConstant.USER_ID, claims.get(TokenConstant.USER_ID));
 			request.setAttribute(TokenConstant.NICK_NAME, claims.get(TokenConstant.NICK_NAME));

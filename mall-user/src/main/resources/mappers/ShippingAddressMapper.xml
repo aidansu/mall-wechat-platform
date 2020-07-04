@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aidansu.mall.user.dao.ShippingAddressMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="shippingAddressResultMap" type="com.aidansu.mall.user.entity.ShippingAddress">
+        <id column="id" property="id"/>
+
+        <result column="user_id" property="userId"/>
+        <result column="receiver_name" property="receiverName"/>
+        <result column="receiver_phone" property="receiverPhone"/>
+        <result column="country" property="country"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="district" property="district"/>
+        <result column="postcode" property="postcode"/>
+        <result column="address" property="address"/>
+        <result column="address_tag" property="addressTag"/>
+        <result column="default_status" property="defaultStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, receiver_name, receiver_phone, country, province, city, district, postcode, address, address_tag, default_status,
+        create_time,
+        update_time,
+        is_deleted
+    </sql>
+
+    <select id="selectShippingAddressByUserId" resultMap="shippingAddressResultMap">
+        SELECT
+        address.id,
+        address.user_id,
+        address.receiver_name,
+        address.receiver_phone,
+        address.country,
+        address.province,
+        address.city,
+        address.district,
+        address.address,
+        address.address_tag,
+        address.postcode,
+        address.default_status,
+        address.is_deleted,
+        address.create_time,
+        address.update_time
+        FROM mall_shipping_address AS address
+        WHERE address.is_deleted = 0
+        AND address.user_id = #{userId}
+        ORDER BY address.default_status DESC, address.update_time DESC
+    </select>
+
+</mapper>

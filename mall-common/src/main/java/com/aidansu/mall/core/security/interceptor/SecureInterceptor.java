@@ -3,7 +3,7 @@ package com.aidansu.mall.core.security.interceptor;
 import com.aidansu.mall.core.api.R;
 import com.aidansu.mall.core.api.ResultCode;
 import com.aidansu.mall.core.constant.CommonConstant;
-import com.aidansu.mall.core.security.utils.JwtUtil;
+import com.aidansu.mall.core.security.utils.JwtTokenUtil;
 import com.aidansu.mall.core.utils.WebUtil;
 import com.alibaba.fastjson.JSON;
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ public class SecureInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		if (JwtUtil.checkToken()) {
+		if (JwtTokenUtil.checkToken()) {
 			return true;
 		} else {
 			log.warn("签名认证失败，请求接口：{}，请求IP：{}，请求参数：{}", request.getRequestURI(), WebUtil.getIP(request), JSON.toJSONString(request.getParameterMap()));

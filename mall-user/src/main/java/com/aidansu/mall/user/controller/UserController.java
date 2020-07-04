@@ -2,10 +2,10 @@ package com.aidansu.mall.user.controller;
 
 import com.aidansu.mall.core.api.R;
 import com.aidansu.mall.core.api.ResultCode;
-import com.aidansu.mall.core.security.JwtUser;
+import com.aidansu.mall.core.security.AuthUserDetails;
 import com.aidansu.mall.core.security.auth.PreAuth;
 import com.aidansu.mall.core.security.exception.SecureException;
-import com.aidansu.mall.core.security.utils.JwtUtil;
+import com.aidansu.mall.core.security.utils.JwtTokenUtil;
 import com.aidansu.mall.user.dto.AdminUserLoginDTO;
 import com.aidansu.mall.user.dto.WechatUserLoginDTO;
 import com.aidansu.mall.user.entity.User;
@@ -22,7 +22,7 @@ import java.util.Collections;
 /**
  * 用户控制器
  *
- * @author aidansu
+ * @author aidan
  */
 @RestController
 @RequestMapping("/users")
@@ -48,7 +48,7 @@ public class UserController {
     @GetMapping("/detail")
     public R<User> detail() {
         // 通过token获取用户ID，再通过用户ID获取用户详细信息
-        JwtUser jwtUser = JwtUtil.getUser();
+        AuthUserDetails jwtUser = JwtTokenUtil.getUser();
         if(jwtUser == null){
             throw new SecureException(ResultCode.UN_AUTHORIZED);
         }

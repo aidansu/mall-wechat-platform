@@ -3,7 +3,7 @@ package com.aidansu.mall.auth.utils;
 import com.aidansu.mall.core.constant.TokenConstant;
 import com.aidansu.mall.auth.entity.AuthInfo;
 import com.aidansu.mall.auth.entity.UserInfo;
-import com.aidansu.mall.core.security.utils.JwtUtil;
+import com.aidansu.mall.core.security.utils.JwtTokenUtil;
 import com.aidansu.mall.core.security.TokenInfo;
 
 import java.util.HashMap;
@@ -32,7 +32,7 @@ public class TokenUtil {
 		param.put(TokenConstant.NICK_NAME, userInfo.getNickName());
 		param.put(TokenConstant.AUTHORITIES, userInfo.getAuthorities());
 
-		TokenInfo accessToken = JwtUtil.createJWT(param, TokenConstant.ACCESS_TOKEN);
+		TokenInfo accessToken = JwtTokenUtil.createJWT(param, TokenConstant.ACCESS_TOKEN);
 		AuthInfo authInfo = new AuthInfo();
 		authInfo.setMiniOpenid(userInfo.getMiniOpenid());
 		authInfo.setNickName(userInfo.getNickName());
@@ -57,7 +57,7 @@ public class TokenUtil {
 		Map<String, Object> param = new HashMap<>(16);
 		param.put(TokenConstant.TOKEN_TYPE, TokenConstant.REFRESH_TOKEN);
 		param.put(TokenConstant.USER_ID, String.valueOf(userInfo.getId()));
-		return JwtUtil.createJWT(param, TokenConstant.REFRESH_TOKEN);
+		return JwtTokenUtil.createJWT(param, TokenConstant.REFRESH_TOKEN);
 	}
 
 }

@@ -3,8 +3,8 @@ package com.aidansu.mall.core.error;
 import com.aidansu.mall.core.api.R;
 import com.aidansu.mall.core.api.ResultCode;
 import com.aidansu.mall.core.security.exception.SecureException;
+import com.aidansu.mall.core.utils.StringUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -129,7 +129,7 @@ public class GlobalRestExceptionTranslator {
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public R<String> handleError(Throwable e) {
 		log.error(ResultCode.INTERNAL_SERVER_ERROR.getMessage(), e);
-		return R.fail(ResultCode.INTERNAL_SERVER_ERROR, (StringUtils.isEmpty(e.getMessage()) ? ResultCode.INTERNAL_SERVER_ERROR.getMessage() : e.getMessage()));
+		return R.fail(ResultCode.INTERNAL_SERVER_ERROR, (StringUtil.isEmpty(e.getMessage()) ? ResultCode.INTERNAL_SERVER_ERROR.getMessage() : e.getMessage()));
 	}
 
 	@ExceptionHandler(value = ApisException.class)

@@ -1,10 +1,14 @@
 package com.aidansu.mall.user.entity;
 
 import com.aidansu.mall.core.constant.CommonConstant;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,10 +24,13 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@TableName("mall_user")
+@ApiModel(value = "User对象", description = "User对象")
 public class User {
 
 	@JsonSerialize(using = ToStringSerializer.class)
 	@ApiModelProperty("主键id")
+	@TableId(value = "id", type = IdType.AUTO)
 	private Long id;
 	/**
 	 * 租户ID

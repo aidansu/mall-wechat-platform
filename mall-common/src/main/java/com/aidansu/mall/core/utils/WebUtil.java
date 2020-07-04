@@ -2,7 +2,6 @@ package com.aidansu.mall.core.utils;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
@@ -153,25 +152,25 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
 	public static String getIP(HttpServletRequest request) {
 		Assert.notNull(request, "HttpServletRequest is null");
 		String ip = request.getHeader("X-Requested-For");
-		if (StringUtils.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
+		if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("X-Forwarded-For");
 		}
-		if (StringUtils.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
+		if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("Proxy-Client-IP");
 		}
-		if (StringUtils.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
+		if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("WL-Proxy-Client-IP");
 		}
-		if (StringUtils.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
+		if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("HTTP_CLIENT_IP");
 		}
-		if (StringUtils.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
+		if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
 		}
-		if (StringUtils.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
+		if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getRemoteAddr();
 		}
-		return StringUtils.isBlank(ip) ? null : ip.split(",")[0];
+		return StringUtil.isBlank(ip) ? null : ip.split(",")[0];
 	}
 
 
@@ -198,7 +197,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
 	 */
 	public static String getRequestStr(HttpServletRequest request) throws IOException {
 		String queryString = request.getQueryString();
-		if (StringUtils.isNotBlank(queryString)) {
+		if (StringUtil.isNotBlank(queryString)) {
 			return new String(queryString.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8).replaceAll("&amp;", "&").replaceAll("%22", "\"");
 		}
 		return getRequestStr(request, getRequestBytes(request));
@@ -241,7 +240,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
 			charEncoding = "UTF-8";
 		}
 		String str = new String(buffer, charEncoding).trim();
-		if (StringUtils.isBlank(str)) {
+		if (StringUtil.isBlank(str)) {
 			StringBuilder sb = new StringBuilder();
 			Enumeration<String> parameterNames = request.getParameterNames();
 			while (parameterNames.hasMoreElements()) {

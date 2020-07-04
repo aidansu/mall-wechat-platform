@@ -18,7 +18,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class JwtUser implements Serializable {
+public class AuthUserDetails implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

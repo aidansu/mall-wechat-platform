@@ -12,7 +12,7 @@ API网关：Spring Cloud Gateway
 
 服务限流与熔断：Sentinel 
 
-持久层框架：Mybatis 
+持久层框架：MyBatis-Plus
 
 HTTP客户端：Feign
 
@@ -29,7 +29,7 @@ HTTP客户端：Feign
 | Spring Boot          | 2.1.9         |
 | Spring Cloud         | Greenwich.SR6 |
 | Spring Cloud Alibaba | 2.1.2.RELEASE |
-| Mybatis              | 3.5.2         |
+| MyBatis-Plus         | 3.1.2         |
 
 ## 工程结构
 ```

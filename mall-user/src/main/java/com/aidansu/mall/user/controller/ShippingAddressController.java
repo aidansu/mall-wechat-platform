@@ -36,7 +36,7 @@ public class ShippingAddressController {
 	* 详情
 	*/
 	@GetMapping("/detail")
-	@ApiOperation(value = "详情", notes = "传入shippingAddress")
+	@ApiOperation(value = "详情", notes = "传入主键ID")
 	public R<ShippingAddressVO> detail(@RequestParam Long id) {
 		AuthUserDetails user = JwtTokenUtil.getUser();
 		ShippingAddress detail = shippingAddressService.getById(id);

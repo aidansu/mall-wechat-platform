@@ -11,6 +11,7 @@ import com.aidansu.mall.auth.feign.IUserClient;
 import com.aidansu.mall.auth.utils.TokenUtil;
 import com.aidansu.mall.core.security.exception.SecureException;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +28,13 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/auth")
 @Slf4j
-@Api(value = "认证授权", tags = "认证授权接口")
+@Api(value = "认证授权", tags = "认证授权")
 public class AuthController {
 
     @Resource
     private IUserClient userClient;
 
+    @ApiOperation(value = "获取Token", notes = "传入 code 或 tenantId，username, password")
     @PostMapping("/token")
     public AuthInfo login(@Valid @RequestBody UserLoginDTO dto){
         log.info("/token ==> {}",dto);

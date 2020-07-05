@@ -1,12 +1,10 @@
 package com.aidansu.mall.core.security.config;
 
-import com.aidansu.mall.core.security.auth.AuthAspect;
 import com.aidansu.mall.core.security.interceptor.SecureInterceptor;
 import com.aidansu.mall.core.security.props.SecureProperties;
 import com.aidansu.mall.core.security.registry.SecureRegistry;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

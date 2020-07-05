@@ -44,6 +44,14 @@
             <artifactId>sentinel-transport-simple-http</artifactId>
         </dependency>
 
+        <!-- mall-common -->
+        <dependency>
+            <groupId>com.aidansu.mall</groupId>
+            <artifactId>mall-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

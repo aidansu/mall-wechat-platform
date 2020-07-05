@@ -12,6 +12,7 @@ import com.aidansu.mall.user.entity.User;
 import com.aidansu.mall.user.service.IUserService;
 import com.aidansu.mall.user.vo.UserInfoVO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,17 +36,20 @@ public class UserController {
 
     @PreAuth("ROLE_ADMIN")
     @GetMapping("/{id}")
+    @ApiOperation(value = "用户信息", notes = "传入主键id")
     public R<User> findById(@PathVariable Long id) {
         return R.data(this.userService.findById(id));
     }
 
     @PreAuth("ROLE_ADMIN")
     @GetMapping("/mini-openid/{openid}")
+    @ApiOperation(value = "用户信息", notes = "传入小程序openid")
     public R<User> findByOpenid(@PathVariable String openid) {
         return R.data(this.userService.findByMiniOpenid(openid));
     }
 
     @GetMapping("/detail")
+    @ApiOperation(value = "详情", notes = "传入小程序openid")
     public R<User> detail() {
         // 通过token获取用户ID，再通过用户ID获取用户详细信息
         AuthUserDetails jwtUser = JwtTokenUtil.getUser();
@@ -57,6 +61,7 @@ public class UserController {
     }
 
     @PostMapping("/login/mini")
+    @ApiOperation(value = "小程序登录", notes = "传入code")
     public R<UserInfoVO> loginByMini(@Valid @RequestBody WechatUserLoginDTO wechatUserLoginDTO){
         log.info("/login/mini ==> {}",wechatUserLoginDTO);
         User user =  this.userService.loginByMini(wechatUserLoginDTO);
@@ -73,6 +78,7 @@ public class UserController {
     }
 
     @PostMapping("/login/username")
+    @ApiOperation(value = "用户名密码登录", notes = "传入tenantId,username,password")
     public R<UserInfoVO> loginByUsername(@Valid @RequestBody AdminUserLoginDTO adminUserLoginDTO){
         log.info("/login/username ==> {}",adminUserLoginDTO);
         User user =  this.userService.loginByUsername(adminUserLoginDTO);

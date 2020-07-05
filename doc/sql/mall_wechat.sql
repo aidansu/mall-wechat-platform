@@ -61,4 +61,29 @@ INSERT INTO `mall_user` VALUES (1, '000000', NULL, NULL, NULL, 'admin', 'e10adc3
 INSERT INTO `mall_user` VALUES (2, '000001', NULL, 0x6F57537833354B5A59536634634C314979486D62554256414C6A7163, 'TjhxDd9V/axODl0FX1yJqg==', NULL, NULL, NULL, '常威暴打来福', NULL, NULL, NULL, 1, 'htts://wx.qlogo.cn/', 'Jiangmen', 'Guangdong', 'China', 'zh_CN', '2020-06-05 09:48:58', NULL, '2020-06-02 12:06:38', NULL, '2020-06-05 09:48:58', 1, 0);
 COMMIT;
 
+-- ----------------------------
+-- Table structure for mall_shipping_address
+-- ----------------------------
+DROP TABLE IF EXISTS `mall_shipping_address`;
+CREATE TABLE `mall_shipping_address` (
+  `id` bigint(64) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(64) DEFAULT NULL COMMENT '用户id',
+  `receiver_name` varchar(20) DEFAULT NULL COMMENT '联系人',
+  `receiver_phone` varchar(20) DEFAULT NULL COMMENT '手机号',
+  `gender` int(2) DEFAULT NULL COMMENT '性别',
+  `country` varchar(20) DEFAULT NULL COMMENT '国家',
+  `province` varchar(20) DEFAULT NULL COMMENT '省份',
+  `city` varchar(20) DEFAULT NULL COMMENT '城市',
+  `district` varchar(20) DEFAULT NULL COMMENT '区/县',
+  `address` varchar(255) DEFAULT NULL COMMENT '收货地址',
+  `address_tag` varchar(255) DEFAULT NULL COMMENT '地址标签',
+  `postcode` varchar(6) DEFAULT NULL COMMENT '邮编',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `default_status` int(2) DEFAULT '0' COMMENT '默认地址1-是，0-不是',
+  `is_deleted` int(2) DEFAULT NULL COMMENT '删除状态',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='收货地址';
+
+
 SET FOREIGN_KEY_CHECKS = 1;

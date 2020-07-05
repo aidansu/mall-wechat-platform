@@ -1,4 +1,4 @@
-package com.aidansu.mall.core.mybatis.config;
+package com.aidansu.mall.user.config;
 
 import com.aidansu.mall.core.constant.CommonConstant;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;

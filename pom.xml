@@ -23,6 +23,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>Greenwich.SR6</spring-cloud.version>
         <spring-cloud-alibaba.version>2.1.2.RELEASE</spring-cloud-alibaba.version>
+        <mybatis.plus.version>3.1.2</mybatis.plus.version>
+        <jjwt.version>0.10.7</jjwt.version>
+        <fastjson.version>1.2.72</fastjson.version>
         <swagger2.version>2.9.2</swagger2.version>
         <swagger2.models.version>1.5.21</swagger2.models.version>
         <swagger.bootstrap.ui.version>1.9.6</swagger.bootstrap.ui.version>
@@ -38,6 +41,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
 
@@ -81,11 +90,6 @@
             <groupId>io.swagger</groupId>
             <artifactId>swagger-models</artifactId>
             <version>${swagger2.models.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>swagger-bootstrap-ui</artifactId>
-            <version>${swagger.bootstrap.ui.version}</version>
         </dependency>
 
     </dependencies>

@@ -36,14 +36,14 @@ public class UserController {
 
     @PreAuth("ROLE_ADMIN")
     @GetMapping("/{id}")
-    @ApiOperation(value = "用户信息", notes = "传入主键id")
+    @ApiOperation(value = "通过id获取用户信息", notes = "传入主键id")
     public R<User> findById(@PathVariable Long id) {
         return R.data(this.userService.findById(id));
     }
 
     @PreAuth("ROLE_ADMIN")
     @GetMapping("/mini-openid/{openid}")
-    @ApiOperation(value = "用户信息", notes = "传入小程序openid")
+    @ApiOperation(value = "通过小程序openid获取用户信息", notes = "传入小程序openid")
     public R<User> findByOpenid(@PathVariable String openid) {
         return R.data(this.userService.findByMiniOpenid(openid));
     }

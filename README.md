@@ -14,6 +14,8 @@ API网关：Spring Cloud Gateway
 
 持久层框架：MyBatis-Plus
 
+接口测试框架：Swagger2
+
 HTTP客户端：Feign
 
 认证授权：JWT

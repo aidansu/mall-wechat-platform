@@ -1,5 +1,6 @@
-package com.aidansu.mall.gateway;
+package com.aidansu.mall.gateway.config;
 
+import com.aidansu.mall.gateway.handle.GpSentinelGatewayBlockExceptionHandler;
 import com.alibaba.csp.sentinel.adapter.gateway.common.api.ApiDefinition;
 import com.alibaba.csp.sentinel.adapter.gateway.common.api.GatewayApiDefinitionManager;
 import com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayFlowRule;

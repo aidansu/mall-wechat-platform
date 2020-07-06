@@ -1,4 +1,4 @@
-package com.aidansu.mall.gateway;
+package com.aidansu.mall.gateway.handle;
 
 import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.GatewayCallbackManager;
 import com.alibaba.csp.sentinel.slots.block.BlockException;

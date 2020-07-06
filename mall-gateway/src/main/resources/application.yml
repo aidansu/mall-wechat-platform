@@ -40,3 +40,12 @@ management:
 logging:
   level:
     org.springframework.cloud.gateway: trace
+
+# 聚合文档配置
+mall:
+  document:
+    resources:
+      - name: 认证授权系统
+        location: /mall-auth
+      - name: 用户管理系统
+        location: /mall-user

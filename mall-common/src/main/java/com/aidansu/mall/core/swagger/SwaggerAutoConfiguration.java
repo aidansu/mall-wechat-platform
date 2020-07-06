@@ -1,18 +1,3 @@
-/**
- * Copyright (c) 2018-2028, lengleng (wangiegie@gmail.com).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.aidansu.mall.core.swagger;
 
 
@@ -83,7 +68,7 @@ public class SwaggerAutoConfiguration {
 			.apis(SwaggerUtil.basePackages(swaggerProperties.getBasePackages()))
 			.paths(Predicates.and(Predicates.not(Predicates.or(excludePath)), Predicates.or(basePath)))
 			.build()
-			.securitySchemes(Collections.singletonList(securitySchema()))
+			.securitySchemes(Collections.singletonList(apiKey()))
 			.securityContexts(Collections.singletonList(securityContext()))
 			.pathMapping("/");
 	}
@@ -116,13 +101,18 @@ public class SwaggerAutoConfiguration {
 	}
 
 
-	private OAuth securitySchema() {
-		ArrayList<AuthorizationScope> authorizationScopeList = new ArrayList<>();
-		swaggerProperties().getAuthorization().getAuthorizationScopeList().forEach(authorizationScope -> authorizationScopeList.add(new AuthorizationScope(authorizationScope.getScope(), authorizationScope.getDescription())));
-		ArrayList<GrantType> grantTypes = new ArrayList<>();
-		swaggerProperties().getAuthorization().getTokenUrlList().forEach(tokenUrl -> grantTypes.add(new ResourceOwnerPasswordCredentialsGrant(tokenUrl)));
-		return new OAuth(swaggerProperties().getAuthorization().getName(), authorizationScopeList, grantTypes);
+	private ApiKey apiKey() {
+		//HttpHeaders.AUTHORIZATION
+		return new ApiKey("BearerToken", "Authorization", "header");
 	}
+
+//	private OAuth securitySchema() {
+//		ArrayList<AuthorizationScope> authorizationScopeList = new ArrayList<>();
+//		swaggerProperties().getAuthorization().getAuthorizationScopeList().forEach(authorizationScope -> authorizationScopeList.add(new AuthorizationScope(authorizationScope.getScope(), authorizationScope.getDescription())));
+//		ArrayList<GrantType> grantTypes = new ArrayList<>();
+//		swaggerProperties().getAuthorization().getTokenUrlList().forEach(tokenUrl -> grantTypes.add(new ResourceOwnerPasswordCredentialsGrant(tokenUrl)));
+//		return new OAuth(swaggerProperties().getAuthorization().getName(), authorizationScopeList, grantTypes);
+//	}
 
 	private ApiInfo apiInfo(SwaggerProperties swaggerProperties) {
 		return new ApiInfoBuilder()

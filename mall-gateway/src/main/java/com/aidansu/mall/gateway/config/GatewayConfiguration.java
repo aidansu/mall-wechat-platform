@@ -42,7 +42,7 @@ public class GatewayConfiguration {
      */
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    public GlobalFilter sentinelGatewayFilter(){
+    public GlobalFilter sentinelGatewayFilter() {
         return new SentinelGatewayFilter();
     }
 
@@ -51,12 +51,12 @@ public class GatewayConfiguration {
      */
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    public GpSentinelGatewayBlockExceptionHandler sentinelGatewayBlockExceptionHandler(){
-        return new GpSentinelGatewayBlockExceptionHandler(viewResolvers,serverCodecConfigurer);
+    public GpSentinelGatewayBlockExceptionHandler sentinelGatewayBlockExceptionHandler() {
+        return new GpSentinelGatewayBlockExceptionHandler(viewResolvers, serverCodecConfigurer);
     }
 
     @PostConstruct
-    public void doInit(){
+    public void doInit() {
         initGatewayRules();
         initCustomizedApis();
     }
@@ -64,8 +64,8 @@ public class GatewayConfiguration {
     /**
      * 初始化限流规则
      */
-    private void initGatewayRules(){
-        Set<GatewayFlowRule> rules=new HashSet<>();
+    private void initGatewayRules() {
+        Set<GatewayFlowRule> rules = new HashSet<>();
 //        GatewayFlowRule gatewayFlowRule=new GatewayFlowRule("user_route").setCount(1).setIntervalSec(1);
 //
 //        GatewayFlowRule customerFlowRule=new GatewayFlowRule("first_customized_api").
@@ -76,14 +76,14 @@ public class GatewayConfiguration {
         GatewayRuleManager.loadRules(rules);
     }
 
-    private void initCustomizedApis(){
-       Set<ApiDefinition> definitions=new HashSet<>();
+    private void initCustomizedApis() {
+        Set<ApiDefinition> definitions = new HashSet<>();
 //       ApiDefinition apiDefinition=new ApiDefinition("first_customized_api");
 //       apiDefinition.setPredicateItems(new HashSet<ApiPredicateItem>(){{
 //           add(new ApiPathPredicateItem().setPattern("/system/**"));
 //           add(new ApiPathPredicateItem().setPattern("/users/**").setMatchStrategy(SentinelGatewayConstants.URL_MATCH_STRATEGY_PREFIX));
 //       }});
 //       definitions.add(apiDefinition);
-       GatewayApiDefinitionManager.loadApiDefinitions(definitions);
+        GatewayApiDefinitionManager.loadApiDefinitions(definitions);
     }
 }

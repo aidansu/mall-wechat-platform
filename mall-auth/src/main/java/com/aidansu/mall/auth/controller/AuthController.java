@@ -36,32 +36,32 @@ public class AuthController {
 
     @ApiOperation(value = "获取Token", notes = "传入 code 或 tenantId，username, password")
     @PostMapping("/token")
-    public AuthInfo login(@Valid @RequestBody UserLoginDTO dto){
-        log.info("/token ==> {}",dto);
+    public AuthInfo login(@Valid @RequestBody UserLoginDTO dto) {
+        log.info("/token ==> {}", dto);
         R<UserInfo> userInfoDate;
         // 判断登录的类型
-        if(StringUtils.isNotBlank(dto.getCode())) {
+        if (StringUtils.isNotBlank(dto.getCode())) {
             userInfoDate = this.userClient.loginByMini(dto);
-        }else if(StringUtils.isNotBlank(dto.getUsername()) && StringUtils.isNotBlank(dto.getPassword())){
+        } else if (StringUtils.isNotBlank(dto.getUsername()) && StringUtils.isNotBlank(dto.getPassword())) {
             userInfoDate = this.userClient.loginByUsername(dto);
-        }else{
+        } else {
             throw new SecureException(ResultCode.PARAM_MISS);
         }
         // 判断是否有数据返回和返回的数据是否成功
-        if(userInfoDate == null){
+        if (userInfoDate == null) {
             throw new ApisException(ApisConstant.LOGIN_FAILED);
         }
-        if(userInfoDate.getStatus() != HttpServletResponse.SC_OK){
+        if (userInfoDate.getStatus() != HttpServletResponse.SC_OK) {
             throw new ApisException(userInfoDate.getMessage());
         }
 
         UserInfo userInfo = userInfoDate.getData();
         // 判断是否获取到用户信息
-        if(userInfo == null){
+        if (userInfo == null) {
             throw new ApisException(ApisConstant.LOGIN_FAILED);
         }
         // 判断该用户是否已经登录过
-        if(StringUtils.isBlank(userInfo.getNickName())){
+        if (StringUtils.isBlank(userInfo.getNickName())) {
             throw new ApisException(ApisConstant.PLEASE_LOGIN_FIRST);
         }
 

@@ -17,10 +17,10 @@ import org.springframework.core.annotation.Order;
 @AutoConfigureBefore(SecureConfiguration.class)
 public class RegistryConfiguration {
 
-	@Bean
-	@ConditionalOnMissingBean(SecureRegistry.class)
-	public SecureRegistry secureRegistry() {
-		return new SecureRegistry();
-	}
+    @Bean
+    @ConditionalOnMissingBean(SecureRegistry.class)
+    public SecureRegistry secureRegistry() {
+        return new SecureRegistry();
+    }
 
 }

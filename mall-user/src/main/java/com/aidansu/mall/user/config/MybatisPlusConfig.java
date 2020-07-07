@@ -16,20 +16,20 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 public class MybatisPlusConfig {
 
-	@Bean
-	@ConditionalOnMissingBean(PaginationInterceptor.class)
-	public PaginationInterceptor paginationInterceptor() {
-		return new PaginationInterceptor();
-	}
+    @Bean
+    @ConditionalOnMissingBean(PaginationInterceptor.class)
+    public PaginationInterceptor paginationInterceptor() {
+        return new PaginationInterceptor();
+    }
 
-	/**
-	 * 打印 SQL 执行语句
-	 */
-	@Bean
-	@Profile({CommonConstant.DEV_CODE, CommonConstant.TEST_CODE})
-	public PerformanceInterceptor performanceInterceptor() {
-		return new PerformanceInterceptor();
-	}
+    /**
+     * 打印 SQL 执行语句
+     */
+    @Bean
+    @Profile({CommonConstant.DEV_CODE, CommonConstant.TEST_CODE})
+    public PerformanceInterceptor performanceInterceptor() {
+        return new PerformanceInterceptor();
+    }
 
 }
 

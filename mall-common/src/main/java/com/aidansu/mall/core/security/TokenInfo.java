@@ -10,19 +10,19 @@ import lombok.Data;
 @Data
 public class TokenInfo {
 
-	/**
-	 * 令牌值
-	 */
-	private String token;
+    /**
+     * 令牌值
+     */
+    private String token;
 
-	/**
-	 * 过期秒数
-	 */
-	private int expire;
+    /**
+     * 过期秒数
+     */
+    private int expire;
 
-	/**
-	 * 授权范围
-	 */
-	private String scope;
+    /**
+     * 授权范围
+     */
+    private String scope;
 
 }

@@ -53,7 +53,7 @@ public class UserController {
     public R<User> detail() {
         // 通过token获取用户ID，再通过用户ID获取用户详细信息
         AuthUserDetails jwtUser = JwtTokenUtil.getUser();
-        if(jwtUser == null){
+        if (jwtUser == null) {
             throw new SecureException(ResultCode.UN_AUTHORIZED);
         }
         User user = userService.findById(jwtUser.getUserId());
@@ -62,26 +62,26 @@ public class UserController {
 
     @PostMapping("/login/mini")
     @ApiOperation(value = "小程序登录", notes = "传入code")
-    public R<UserInfoVO> loginByMini(@Valid @RequestBody WechatUserLoginDTO wechatUserLoginDTO){
-        log.info("/login/mini ==> {}",wechatUserLoginDTO);
-        User user =  this.userService.loginByMini(wechatUserLoginDTO);
+    public R<UserInfoVO> loginByMini(@Valid @RequestBody WechatUserLoginDTO wechatUserLoginDTO) {
+        log.info("/login/mini ==> {}", wechatUserLoginDTO);
+        User user = this.userService.loginByMini(wechatUserLoginDTO);
         return R.data(UserInfoVO.builder()
-                    .id(user.getId())
-                    .miniOpenid(user.getMiniOpenid())
-                    .phone(user.getPhone())
-                    .nickName(user.getNickName())
-                    .avatar(user.getAvatar())
-                    .tenantId(user.getTenantId())
-                    .authorities(Collections.singletonList("ROLE_USER"))
-                    .build()
+                .id(user.getId())
+                .miniOpenid(user.getMiniOpenid())
+                .phone(user.getPhone())
+                .nickName(user.getNickName())
+                .avatar(user.getAvatar())
+                .tenantId(user.getTenantId())
+                .authorities(Collections.singletonList("ROLE_USER"))
+                .build()
         );
     }
 
     @PostMapping("/login/username")
     @ApiOperation(value = "用户名密码登录", notes = "传入tenantId,username,password")
-    public R<UserInfoVO> loginByUsername(@Valid @RequestBody AdminUserLoginDTO adminUserLoginDTO){
-        log.info("/login/username ==> {}",adminUserLoginDTO);
-        User user =  this.userService.loginByUsername(adminUserLoginDTO);
+    public R<UserInfoVO> loginByUsername(@Valid @RequestBody AdminUserLoginDTO adminUserLoginDTO) {
+        log.info("/login/username ==> {}", adminUserLoginDTO);
+        User user = this.userService.loginByUsername(adminUserLoginDTO);
         return R.data(UserInfoVO.builder()
                 .id(user.getId())
                 .miniOpenid(user.getMiniOpenid())

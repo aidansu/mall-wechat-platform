@@ -43,100 +43,100 @@ import java.util.Set;
 @RestControllerAdvice
 public class GlobalRestExceptionTranslator {
 
-	@ExceptionHandler(MissingServletRequestParameterException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public R<String> handleError(MissingServletRequestParameterException e) {
-		log.warn(ResultCode.PARAM_MISS.getMessage(), e.getMessage());
-		String message = String.format("%s: %s", ResultCode.PARAM_MISS.getMessage(), e.getParameterName());
-		return R.fail(ResultCode.PARAM_MISS, message);
-	}
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public R<String> handleError(MissingServletRequestParameterException e) {
+        log.warn(ResultCode.PARAM_MISS.getMessage(), e.getMessage());
+        String message = String.format("%s: %s", ResultCode.PARAM_MISS.getMessage(), e.getParameterName());
+        return R.fail(ResultCode.PARAM_MISS, message);
+    }
 
-	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public R<String> handleError(MethodArgumentTypeMismatchException e) {
-		log.warn(ResultCode.PARAM_TYPE_ERROR.getMessage(), e.getMessage());
-		String message = String.format("%s: %s",ResultCode.PARAM_TYPE_ERROR.getMessage(), e.getName());
-		return R.fail(ResultCode.PARAM_TYPE_ERROR, message);
-	}
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public R<String> handleError(MethodArgumentTypeMismatchException e) {
+        log.warn(ResultCode.PARAM_TYPE_ERROR.getMessage(), e.getMessage());
+        String message = String.format("%s: %s", ResultCode.PARAM_TYPE_ERROR.getMessage(), e.getName());
+        return R.fail(ResultCode.PARAM_TYPE_ERROR, message);
+    }
 
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public R<String> handleError(MethodArgumentNotValidException e) {
-		log.warn("参数验证失败", e.getMessage());
-		return handleError(e.getBindingResult());
-	}
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public R<String> handleError(MethodArgumentNotValidException e) {
+        log.warn("参数验证失败", e.getMessage());
+        return handleError(e.getBindingResult());
+    }
 
-	@ExceptionHandler(BindException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public R<String> handleError(BindException e) {
-		log.warn("参数绑定失败", e.getMessage());
-		return handleError(e.getBindingResult());
-	}
+    @ExceptionHandler(BindException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public R<String> handleError(BindException e) {
+        log.warn("参数绑定失败", e.getMessage());
+        return handleError(e.getBindingResult());
+    }
 
-	private R<String> handleError(BindingResult result) {
-		FieldError error = result.getFieldError();
-		String message = String.format("%s:%s", error.getField(), error.getDefaultMessage());
-		return R.fail(ResultCode.PARAM_BIND_ERROR, message);
-	}
+    private R<String> handleError(BindingResult result) {
+        FieldError error = result.getFieldError();
+        String message = String.format("%s:%s", error.getField(), error.getDefaultMessage());
+        return R.fail(ResultCode.PARAM_BIND_ERROR, message);
+    }
 
-	@ExceptionHandler(ConstraintViolationException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public R<String> handleError(ConstraintViolationException e) {
-		log.warn(ResultCode.PARAM_VALID_ERROR.getMessage(), e.getMessage());
-		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-		ConstraintViolation<?> violation = violations.iterator().next();
-		String path = ((PathImpl) violation.getPropertyPath()).getLeafNode().getName();
-		String message = String.format("%s:%s", path, violation.getMessage());
-		return R.fail(ResultCode.PARAM_VALID_ERROR, message);
-	}
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public R<String> handleError(ConstraintViolationException e) {
+        log.warn(ResultCode.PARAM_VALID_ERROR.getMessage(), e.getMessage());
+        Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+        ConstraintViolation<?> violation = violations.iterator().next();
+        String path = ((PathImpl) violation.getPropertyPath()).getLeafNode().getName();
+        String message = String.format("%s:%s", path, violation.getMessage());
+        return R.fail(ResultCode.PARAM_VALID_ERROR, message);
+    }
 
-	@ExceptionHandler(NoHandlerFoundException.class)
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public R<String> handleError(NoHandlerFoundException e) {
-		log.error("{}:{}", ResultCode.NOT_FOUND.getMessage(), e.getMessage());
-		return R.fail(ResultCode.NOT_FOUND, e.getMessage());
-	}
+    @ExceptionHandler(NoHandlerFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public R<String> handleError(NoHandlerFoundException e) {
+        log.error("{}:{}", ResultCode.NOT_FOUND.getMessage(), e.getMessage());
+        return R.fail(ResultCode.NOT_FOUND, e.getMessage());
+    }
 
-	@ExceptionHandler(HttpMessageNotReadableException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public R<String> handleError(HttpMessageNotReadableException e) {
-		log.error("{}:{}", ResultCode.MSG_NOT_READABLE.getMessage(), e.getMessage());
-		return R.fail(ResultCode.MSG_NOT_READABLE, e.getMessage());
-	}
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public R<String> handleError(HttpMessageNotReadableException e) {
+        log.error("{}:{}", ResultCode.MSG_NOT_READABLE.getMessage(), e.getMessage());
+        return R.fail(ResultCode.MSG_NOT_READABLE, e.getMessage());
+    }
 
-	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
-	public R<String> handleError(HttpRequestMethodNotSupportedException e) {
-		log.error("{}:{}", ResultCode.METHOD_NOT_SUPPORTED.getMessage(), e.getMessage());
-		return R.fail(ResultCode.METHOD_NOT_SUPPORTED, e.getMessage());
-	}
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    public R<String> handleError(HttpRequestMethodNotSupportedException e) {
+        log.error("{}:{}", ResultCode.METHOD_NOT_SUPPORTED.getMessage(), e.getMessage());
+        return R.fail(ResultCode.METHOD_NOT_SUPPORTED, e.getMessage());
+    }
 
-	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-	@ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
-	public R<String> handleError(HttpMediaTypeNotSupportedException e) {
-		log.error("{}:{}", ResultCode.MEDIA_TYPE_NOT_SUPPORTED.getMessage(), e.getMessage());
-		return R.fail(ResultCode.MEDIA_TYPE_NOT_SUPPORTED, e.getMessage());
-	}
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+    public R<String> handleError(HttpMediaTypeNotSupportedException e) {
+        log.error("{}:{}", ResultCode.MEDIA_TYPE_NOT_SUPPORTED.getMessage(), e.getMessage());
+        return R.fail(ResultCode.MEDIA_TYPE_NOT_SUPPORTED, e.getMessage());
+    }
 
-	@ExceptionHandler(SecureException.class)
-	@ResponseStatus(HttpStatus.UNAUTHORIZED)
-	public R<String> handleError(SecureException e) {
-		log.error("认证异常", e);
-		return R.fail(e.getResultCode(), e.getMessage());
-	}
+    @ExceptionHandler(SecureException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public R<String> handleError(SecureException e) {
+        log.error("认证异常", e);
+        return R.fail(e.getResultCode(), e.getMessage());
+    }
 
-	@ExceptionHandler(Throwable.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	public R<String> handleError(Throwable e) {
-		log.error(ResultCode.INTERNAL_SERVER_ERROR.getMessage(), e);
-		return R.fail(ResultCode.INTERNAL_SERVER_ERROR, (StringUtil.isEmpty(e.getMessage()) ? ResultCode.INTERNAL_SERVER_ERROR.getMessage() : e.getMessage()));
-	}
+    @ExceptionHandler(Throwable.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public R<String> handleError(Throwable e) {
+        log.error(ResultCode.INTERNAL_SERVER_ERROR.getMessage(), e);
+        return R.fail(ResultCode.INTERNAL_SERVER_ERROR, (StringUtil.isEmpty(e.getMessage()) ? ResultCode.INTERNAL_SERVER_ERROR.getMessage() : e.getMessage()));
+    }
 
-	@ExceptionHandler(value = ApisException.class)
-	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public R<String> apisExceptionResponse(ApisException exception) {
-		return R.fail(HttpStatus.BAD_REQUEST.value(),exception.getMessage());
-	}
+    @ExceptionHandler(value = ApisException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public R<String> apisExceptionResponse(ApisException exception) {
+        return R.fail(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
+    }
 
 }

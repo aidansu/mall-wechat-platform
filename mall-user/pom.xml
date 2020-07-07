@@ -12,7 +12,7 @@
     <artifactId>mall-user</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mall-user</name>
-    <description>微商平台-用户系统</description>
+    <description>微商平台-用户模块</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -54,7 +54,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        
+
         <!-- Spring Cloud Alibaba-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

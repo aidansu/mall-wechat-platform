@@ -36,10 +36,11 @@ HTTP客户端：Feign
 ## 工程结构
 ```
 mall-wechat-platform
-├── mall-auth -- 认证授权系统
+├── mall-auth -- 认证授权模块
 ├── mall-common -- 常用工具共用模块
-├── mall-gateway -- 网关系统
-├── mall-user -- 用户系统
+├── mall-gateway -- 网关模块
+├── mall-user -- 用户模块
+├── mall-product -- 商品模块
 ```
 
 ## 环境要求
@@ -71,4 +72,9 @@ CREATE DATABASE `mall_wechat` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_gene
 tenantId: 000000
 username: admin
 password: 123456
+```
+
+### *  **RESTful API**
+```
+http://localhost:9290/doc.html
 ```

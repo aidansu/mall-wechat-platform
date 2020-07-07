@@ -12,14 +12,14 @@ import org.apache.ibatis.reflection.MetaObject;
 @Slf4j
 public class MallMetaObjectHandler implements MetaObjectHandler {
 
-	@Override
-	public void insertFill(MetaObject metaObject) {
+    @Override
+    public void insertFill(MetaObject metaObject) {
 
-	}
+    }
 
-	@Override
-	public void updateFill(MetaObject metaObject) {
+    @Override
+    public void updateFill(MetaObject metaObject) {
 
-	}
+    }
 
 }

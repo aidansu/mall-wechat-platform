@@ -1,0 +1,60 @@
+server:
+  port: 9293
+
+spring:
+  profiles:
+    active: dev # dev test prod
+  application:
+    name: @project.name@
+    version: @project.version@
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: mysql
+    url: jdbc:mysql://localhost:3306/mall_wechat?characterEncoding=utf-8&useSSL=false
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      filter:
+        # 打开/关闭掉对Spring MVC端点的保护
+        enabled: true
+      transport:
+        # 指定sentinel 控制台的地址
+        dashboard: localhost:1001
+
+# mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath*:/mappers/**Mapper.xml
+  typeAliasesPackage: com.aidansu.mall.user.entity
+  global-config:
+    # 关闭MP3.0自带的banner
+    banner: false
+    db-config:
+      #主键类型  0:"数据库ID自增", 1:"不操作", 2:"用户输入ID",3:"数字型snowflake", 4:"全局唯一ID UUID", 5:"字符串型snowflake";
+      id-type: id_worker
+      #字段策略
+      insert-strategy: not_null
+      update-strategy: not_null
+      select-strategy: not_null
+      #驼峰下划线转换
+      table-underline: true
+      # 逻辑删除配置
+      # 逻辑删除全局值（1表示已删除，这也是Mybatis Plus的默认配置）
+      logic-delete-value: 1
+      # 逻辑未删除全局值（0表示未删除，这也是Mybatis Plus的默认配置）
+      logic-not-delete-value: 0
+    configuration:
+      map-underscore-to-camel-case: true
+      cache-enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+

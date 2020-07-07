@@ -24,7 +24,8 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, user_id, receiver_name, receiver_phone, country, province, city, district, postcode, address, address_tag, default_status,
+        id, user_id, receiver_name, receiver_phone, country, province, city, district, postcode, address, address_tag,
+        default_status,
         create_time,
         update_time,
         is_deleted

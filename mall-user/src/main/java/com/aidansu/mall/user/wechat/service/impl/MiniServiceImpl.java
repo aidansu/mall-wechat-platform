@@ -23,20 +23,20 @@ public class MiniServiceImpl implements MiniService {
 
     @Override
     public UserSession code2Session(String code) {
-        String url = "https://api.weixin.qq.com/sns/jscode2session?appid="+wechatAccountConfig.getMiniAppId()+"&secret="+wechatAccountConfig.getMiniAppSecret()+"&js_code="+code+"&grant_type=authorization_code";
+        String url = "https://api.weixin.qq.com/sns/jscode2session?appid=" + wechatAccountConfig.getMiniAppId() + "&secret=" + wechatAccountConfig.getMiniAppSecret() + "&js_code=" + code + "&grant_type=authorization_code";
         RestTemplate restTemplate = new RestTemplate();
         String userInfo = restTemplate.getForObject(url, String.class);
 
-        if(StringUtils.isEmpty(userInfo)){
+        if (StringUtils.isEmpty(userInfo)) {
             throw new ApisException("获取不到用户信息");
         }
-        UserSession userSession = JSON.parseObject(userInfo,UserSession.class);
-        if(userSession.getErrcode() != null){
-            if(userSession.getErrcode() == 40029){
+        UserSession userSession = JSON.parseObject(userInfo, UserSession.class);
+        if (userSession.getErrcode() != null) {
+            if (userSession.getErrcode() == 40029) {
                 throw new ApisException("code 无效");
-            }else if(userSession.getErrcode() == 45011){
+            } else if (userSession.getErrcode() == 45011) {
                 throw new ApisException("频率限制，每个用户每分钟100次");
-            }else if(userSession.getErrcode() == -1){
+            } else if (userSession.getErrcode() == -1) {
                 throw new ApisException("系统繁忙，此时请开发者稍候再试");
             }
         }

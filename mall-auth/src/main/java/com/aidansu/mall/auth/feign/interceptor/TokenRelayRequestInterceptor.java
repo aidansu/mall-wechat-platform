@@ -22,7 +22,7 @@ public class TokenRelayRequestInterceptor implements RequestInterceptor {
     public void apply(RequestTemplate template) {
         // 1. 获取到token
         HttpServletRequest request = WebUtil.getRequest();
-        if(request != null){
+        if (request != null) {
             String token = request.getHeader(TokenConstant.HEADER);
 
             // 2. 将token传递

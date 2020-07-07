@@ -15,6 +15,6 @@ import java.util.List;
 @ConfigurationProperties("mall.secure.url")
 public class SecureProperties {
 
-	private final List<String> excludePatterns = new ArrayList<>();
+    private final List<String> excludePatterns = new ArrayList<>();
 
 }

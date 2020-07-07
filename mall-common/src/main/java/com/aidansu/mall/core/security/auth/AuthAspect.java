@@ -25,63 +25,61 @@ import java.util.Objects;
 @Component
 public class AuthAspect {
 
-	/**
-	 * 切 方法 和 类上的 @CheckLogin 注解
-	 *
-	 * @param point 切点
-	 * @return Object
-	 * @throws Throwable 没有权限的异常
-	 */
-	@Around(
-			"@annotation(com.aidansu.mall.core.security.auth.PreAuth) || " +
-					"@within(com.aidansu.mall.core.security.auth.PreAuth)"
-	)
-	public Object preAuth(ProceedingJoinPoint point) throws Throwable {
-		if (handleAuth(point)) {
-			return point.proceed();
-		}
-		throw new SecureException(ResultCode.UN_AUTHORIZED);
-	}
+    /**
+     * 切 方法 和 类上的 @CheckLogin 注解
+     *
+     * @param point 切点
+     * @return Object
+     * @throws Throwable 没有权限的异常
+     */
+    @Around(
+            "@annotation(com.aidansu.mall.core.security.auth.PreAuth) || " +
+                    "@within(com.aidansu.mall.core.security.auth.PreAuth)"
+    )
+    public Object preAuth(ProceedingJoinPoint point) throws Throwable {
+        if (handleAuth(point)) {
+            return point.proceed();
+        }
+        throw new SecureException(ResultCode.UN_AUTHORIZED);
+    }
 
-	/**
-	 * 处理权限
-	 *
-	 * @param point 切点
-	 */
-	private boolean handleAuth(ProceedingJoinPoint point) {
-		try {
-			HttpServletRequest request = WebUtil.getRequest();
-			if(request == null){
-				return false;
-			}
+    /**
+     * 处理权限
+     *
+     * @param point 切点
+     */
+    private boolean handleAuth(ProceedingJoinPoint point) {
+        try {
+            HttpServletRequest request = WebUtil.getRequest();
+            if (request == null) {
+                return false;
+            }
 
-			List<String> authorities = new ArrayList<>();
-			Object obj  = request.getAttribute(TokenConstant.AUTHORITIES);
-			if (obj  instanceof ArrayList<?>) {
-				for (Object o : (List<?>) obj ) {
-					authorities.add((String) o);
-				}
-			}
+            List<String> authorities = new ArrayList<>();
+            Object obj = request.getAttribute(TokenConstant.AUTHORITIES);
+            if (obj instanceof ArrayList<?>) {
+                for (Object o : (List<?>) obj) {
+                    authorities.add((String) o);
+                }
+            }
 
-			MethodSignature signature = (MethodSignature) point.getSignature();
-			Method method = signature.getMethod();
-			PreAuth annotation = method.getAnnotation(PreAuth.class);
+            MethodSignature signature = (MethodSignature) point.getSignature();
+            Method method = signature.getMethod();
+            PreAuth annotation = method.getAnnotation(PreAuth.class);
 
-			String value = annotation.value();
+            String value = annotation.value();
 
-			for(String role: authorities){
-				if(Objects.equals(role, value)){
-					return true;
-				}
-			}
-		} catch (Throwable throwable) {
-			throw new SecureException(ResultCode.UN_AUTHORIZED,throwable);
-		}
-		return false;
+            for (String role : authorities) {
+                if (Objects.equals(role, value)) {
+                    return true;
+                }
+            }
+        } catch (Throwable throwable) {
+            throw new SecureException(ResultCode.UN_AUTHORIZED, throwable);
+        }
+        return false;
 
-	}
-
-
+    }
 
 
 }

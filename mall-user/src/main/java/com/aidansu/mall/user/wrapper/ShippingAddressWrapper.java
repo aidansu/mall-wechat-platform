@@ -6,21 +6,21 @@ import com.aidansu.mall.user.vo.ShippingAddressVO;
 import org.springframework.beans.BeanUtils;
 
 /**
- *  收货地址 包装类,返回视图层所需的字段
+ * 收货地址 包装类,返回视图层所需的字段
  *
  * @author aidan
  */
 public class ShippingAddressWrapper extends BaseEntityWrapper<ShippingAddress, ShippingAddressVO> {
 
-	public static ShippingAddressWrapper build() {
-		return new ShippingAddressWrapper();
-	}
+    public static ShippingAddressWrapper build() {
+        return new ShippingAddressWrapper();
+    }
 
-	@Override
-	public ShippingAddressVO entityVO(ShippingAddress shippingAddress) {
-			ShippingAddressVO shippingAddressVO = new ShippingAddressVO();
-			BeanUtils.copyProperties(shippingAddress, shippingAddressVO);
-		return shippingAddressVO;
-	}
+    @Override
+    public ShippingAddressVO entityVO(ShippingAddress shippingAddress) {
+        ShippingAddressVO shippingAddressVO = new ShippingAddressVO();
+        BeanUtils.copyProperties(shippingAddress, shippingAddressVO);
+        return shippingAddressVO;
+    }
 
 }

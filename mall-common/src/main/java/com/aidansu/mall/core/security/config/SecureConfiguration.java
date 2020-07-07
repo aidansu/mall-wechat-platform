@@ -21,20 +21,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableConfigurationProperties({SecureProperties.class})
 public class SecureConfiguration implements WebMvcConfigurer {
 
-	private final SecureRegistry secureRegistry;
+    private final SecureRegistry secureRegistry;
 
-	private final SecureProperties secureProperties;
+    private final SecureProperties secureProperties;
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
 
-		if (secureRegistry.isEnable()) {
-			registry.addInterceptor(new SecureInterceptor())
-				.excludePathPatterns(secureRegistry.getExcludePatterns())
-				.excludePathPatterns(secureRegistry.getDefaultExcludePatterns())
-				.excludePathPatterns(secureProperties.getExcludePatterns());
-		}
-	}
+        if (secureRegistry.isEnable()) {
+            registry.addInterceptor(new SecureInterceptor())
+                    .excludePathPatterns(secureRegistry.getExcludePatterns())
+                    .excludePathPatterns(secureRegistry.getDefaultExcludePatterns())
+                    .excludePathPatterns(secureProperties.getExcludePatterns());
+        }
+    }
 
 
 }

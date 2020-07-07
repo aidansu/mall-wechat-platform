@@ -12,7 +12,7 @@
     <artifactId>mall-auth</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mall-auth</name>
-    <description>微商平台-认证授权系统</description>
+    <description>微商平台-认证授权模块</description>
 
     <properties>
         <java.version>1.8</java.version>

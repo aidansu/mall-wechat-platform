@@ -15,19 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "系统版本", tags = "系统版本")
 public class VersionController {
 
-	@Value("${spring.application.name}")
-	private String applicationName;
+    @Value("${spring.application.name}")
+    private String applicationName;
 
-	@Value("${spring.application.version: }")
-	private String version;
+    @Value("${spring.application.version: }")
+    private String version;
 
-	@Value("${spring.profiles.active}")
-	private String active;
+    @Value("${spring.profiles.active}")
+    private String active;
 
-	@ApiOperation(value = "系统版本")
-	@GetMapping(value = "/version")
-	public String version() {
-		return applicationName+"："+version+" "+active;
-	}
+    @ApiOperation(value = "系统版本")
+    @GetMapping(value = "/version")
+    public String version() {
+        return applicationName + "：" + version + " " + active;
+    }
 
 }

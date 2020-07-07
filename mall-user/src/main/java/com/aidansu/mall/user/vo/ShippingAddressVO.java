@@ -15,6 +15,6 @@ import lombok.EqualsAndHashCode;
 @ApiModel(value = "ShippingAddressVO对象", description = "ShippingAddressVO对象")
 public class ShippingAddressVO extends ShippingAddress {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 }

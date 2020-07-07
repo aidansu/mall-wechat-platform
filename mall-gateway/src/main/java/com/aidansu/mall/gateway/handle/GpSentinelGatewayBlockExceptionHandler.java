@@ -21,13 +21,15 @@ import java.util.List;
  *
  * @author aidan
  */
-public class GpSentinelGatewayBlockExceptionHandler implements WebExceptionHandler{
+public class GpSentinelGatewayBlockExceptionHandler implements WebExceptionHandler {
     private List<ViewResolver> viewResolvers;
     private List<HttpMessageWriter<?>> messageWriters;
+
     public GpSentinelGatewayBlockExceptionHandler(List<ViewResolver> viewResolvers, ServerCodecConfigurer serverCodecConfigurer) {
         this.viewResolvers = viewResolvers;
         this.messageWriters = serverCodecConfigurer.getWriters();
     }
+
     private final Supplier<ServerResponse.Context> contextSupplier = () -> {
         return new ServerResponse.Context() {
             @Override
@@ -41,6 +43,7 @@ public class GpSentinelGatewayBlockExceptionHandler implements WebExceptionHandl
             }
         };
     };
+
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
         if (exchange.getResponse().isCommitted()) {
@@ -51,9 +54,11 @@ public class GpSentinelGatewayBlockExceptionHandler implements WebExceptionHandl
             });
         }
     }
+
     private Mono<ServerResponse> handleBlockedRequest(ServerWebExchange exchange, Throwable throwable) {
         return GatewayCallbackManager.getBlockHandler().handleRequest(exchange, throwable);
     }
+
     private Mono<Void> writeResponse(ServerResponse response, ServerWebExchange exchange) {
         ServerHttpResponse serverHttpResponse = exchange.getResponse();
         serverHttpResponse.getHeaders().add("Content-Type", "application/json;charset=UTF-8");

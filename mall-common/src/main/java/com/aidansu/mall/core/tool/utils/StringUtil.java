@@ -1,12 +1,10 @@
-package com.aidansu.mall.core.utils;
+package com.aidansu.mall.core.tool.utils;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import org.springframework.util.Assert;
 import org.springframework.web.util.HtmlUtils;
 
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;

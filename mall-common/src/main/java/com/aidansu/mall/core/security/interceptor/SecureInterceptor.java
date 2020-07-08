@@ -4,7 +4,7 @@ import com.aidansu.mall.core.api.R;
 import com.aidansu.mall.core.api.ResultCode;
 import com.aidansu.mall.core.constant.CommonConstant;
 import com.aidansu.mall.core.security.utils.JwtTokenUtil;
-import com.aidansu.mall.core.utils.WebUtil;
+import com.aidansu.mall.core.tool.utils.WebUtil;
 import com.alibaba.fastjson.JSON;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

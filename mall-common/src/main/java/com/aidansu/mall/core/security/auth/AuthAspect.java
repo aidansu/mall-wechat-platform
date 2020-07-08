@@ -3,7 +3,7 @@ package com.aidansu.mall.core.security.auth;
 import com.aidansu.mall.core.api.ResultCode;
 import com.aidansu.mall.core.constant.TokenConstant;
 import com.aidansu.mall.core.security.exception.SecureException;
-import com.aidansu.mall.core.utils.WebUtil;
+import com.aidansu.mall.core.tool.utils.WebUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

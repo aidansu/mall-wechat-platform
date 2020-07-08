@@ -1,14 +1,10 @@
 package com.aidansu.mall.auth.feign.interceptor;
 
 import com.aidansu.mall.core.constant.TokenConstant;
-import com.aidansu.mall.core.utils.WebUtil;
+import com.aidansu.mall.core.tool.utils.WebUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
 

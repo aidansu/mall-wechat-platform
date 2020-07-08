@@ -27,7 +27,7 @@ spring:
 # mybatis-plus配置
 mybatis-plus:
   mapper-locations: classpath*:/mappers/**Mapper.xml
-  typeAliasesPackage: com.aidansu.mall.user.entity
+  typeAliasesPackage: com.aidansu.mall.product.entity
   global-config:
     # 关闭MP3.0自带的banner
     banner: false

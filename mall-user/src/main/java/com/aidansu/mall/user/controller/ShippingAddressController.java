@@ -4,7 +4,7 @@ import com.aidansu.mall.core.api.R;
 import com.aidansu.mall.core.error.ApisException;
 import com.aidansu.mall.core.security.AuthUserDetails;
 import com.aidansu.mall.core.security.utils.JwtTokenUtil;
-import com.aidansu.mall.core.utils.Func;
+import com.aidansu.mall.core.tool.utils.Func;
 import com.aidansu.mall.user.entity.ShippingAddress;
 import com.aidansu.mall.user.service.IShippingAddressService;
 import com.aidansu.mall.user.vo.ShippingAddressVO;
@@ -15,6 +15,7 @@ import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,11 +26,11 @@ import java.util.List;
  * @author aidan
  */
 @RestController
-@AllArgsConstructor
 @RequestMapping("/shipping-address")
 @Api(value = "收货地址", tags = "收货地址接口")
 public class ShippingAddressController {
 
+    @Resource
     private IShippingAddressService shippingAddressService;
 
     /**

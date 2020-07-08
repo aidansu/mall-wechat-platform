@@ -1,7 +1,7 @@
 package com.aidansu.mall.core.mybatis.support;
 
-import com.aidansu.mall.core.utils.Func;
-import com.aidansu.mall.core.utils.StringUtil;
+import com.aidansu.mall.core.tool.utils.Func;
+import com.aidansu.mall.core.tool.utils.StringUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 

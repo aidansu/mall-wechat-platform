@@ -3,7 +3,7 @@ package com.aidansu.mall.core.error;
 import com.aidansu.mall.core.api.R;
 import com.aidansu.mall.core.api.ResultCode;
 import com.aidansu.mall.core.security.exception.SecureException;
-import com.aidansu.mall.core.utils.StringUtil;
+import com.aidansu.mall.core.tool.utils.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

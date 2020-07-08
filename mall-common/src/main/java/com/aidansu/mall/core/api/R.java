@@ -1,7 +1,7 @@
 package com.aidansu.mall.core.api;
 
 import com.aidansu.mall.core.constant.ApisConstant;
-import com.aidansu.mall.core.utils.ObjectUtil;
+import com.aidansu.mall.core.tool.utils.ObjectUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;

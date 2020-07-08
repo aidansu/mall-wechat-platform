@@ -25,7 +25,7 @@ CREATE TABLE `mall_user` (
   `id` bigint(64) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `tenant_id` varchar(12) DEFAULT '000000' COMMENT '租户ID',
   `unionid` varchar(255) DEFAULT NULL COMMENT '平台唯一标识',
-  `mini_openid` varbinary(64) DEFAULT NULL COMMENT '小程序用户唯一标识',
+  `mini_openid` varchar(64) DEFAULT NULL COMMENT '小程序用户唯一标识',
   `session_key` varchar(255) DEFAULT NULL COMMENT '小程序会话密钥',
   `username` varchar(45) DEFAULT NULL COMMENT '账号',
   `password` varchar(255) DEFAULT NULL COMMENT '密码',
@@ -58,7 +58,7 @@ CREATE TABLE `mall_user` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `mall_user` VALUES (1, '000000', NULL, NULL, NULL, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'aidan', 'aidansu', 'aidansu@163.com', '15999999999', '2019-09-09 00:00:00', 1, NULL, NULL, NULL, NULL, NULL, '2020-06-27 21:26:05', 1, '2019-09-08 11:00:00', 1, '2020-06-27 21:26:05', 1, 0);
-INSERT INTO `mall_user` VALUES (2, '000001', NULL, 0x6F57537833354B5A59536634634C314979486D62554256414C6A7163, 'TjhxDd9V/axODl0FX1yJqg==', NULL, NULL, NULL, '常威暴打来福', NULL, NULL, NULL, 1, 'htts://wx.qlogo.cn/', 'Jiangmen', 'Guangdong', 'China', 'zh_CN', '2020-06-05 09:48:58', NULL, '2020-06-02 12:06:38', NULL, '2020-06-05 09:48:58', 1, 0);
+INSERT INTO `mall_user` VALUES (2, '000001', NULL, 'oWSx35KZYSf4cL1IyHmbUBVALjqc', 'TjhxDd9V/axODl0FX1yJqg==', NULL, NULL, NULL, '常威暴打来福', NULL, NULL, NULL, 1, 'htts://wx.qlogo.cn/', 'Jiangmen', 'Guangdong', 'China', 'zh_CN', '2020-06-05 09:48:58', NULL, '2020-06-02 12:06:38', NULL, '2020-06-05 09:48:58', 1, 0);
 COMMIT;
 
 -- ----------------------------
@@ -84,6 +84,25 @@ CREATE TABLE `mall_shipping_address` (
   `is_deleted` int(2) DEFAULT NULL COMMENT '删除状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='收货地址';
+
+-- ----------------------------
+-- Table structure for mall_category
+-- ----------------------------
+DROP TABLE IF EXISTS `mall_category`;
+CREATE TABLE `mall_category` (
+  `id` bigint(64) NOT NULL AUTO_INCREMENT COMMENT '类别Id',
+  `tenant_id` varchar(12) DEFAULT NULL COMMENT '租户ID',
+  `parent_id` bigint(64) DEFAULT NULL COMMENT '父类别id当id=0时说明是根节点,一级类别',
+  `name` varchar(50) DEFAULT NULL COMMENT '类别名称',
+  `sort` int(4) DEFAULT NULL COMMENT '排序编号,同类展示顺序,数值相等则自然排序',
+  `create_user` bigint(64) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_user` bigint(64) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `status` tinyint(1) DEFAULT '1' COMMENT '类别状态1-正常,2-已废弃',
+  `is_deleted` int(2) DEFAULT '0' COMMENT '删除状态0-正常,1已删除',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品类别';
 
 
 SET FOREIGN_KEY_CHECKS = 1;

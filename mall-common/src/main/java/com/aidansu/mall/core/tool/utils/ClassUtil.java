@@ -1,4 +1,4 @@
-package com.aidansu.mall.core.utils;
+package com.aidansu.mall.core.tool.utils;
 
 import org.springframework.core.BridgeMethodResolver;
 import org.springframework.core.DefaultParameterNameDiscoverer;

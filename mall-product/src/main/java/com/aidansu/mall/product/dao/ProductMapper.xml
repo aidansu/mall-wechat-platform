@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aidansu.mall.product.dao.ProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="productResultMap" type="com.aidansu.mall.product.entity.Product">
+        <id column="id" property="id"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="name" property="name"/>
+        <result column="subtitle" property="subtitle"/>
+        <result column="main_image" property="mainImage"/>
+        <result column="sub_images" property="subImages"/>
+        <result column="detail" property="detail"/>
+        <result column="price" property="price"/>
+        <result column="stock" property="stock"/>
+        <result column="show_in_host" property="showInHost"/>
+        <result column="show_in_top" property="showInTop"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        create_user,
+        create_time,
+        update_user,
+        update_time,
+        status,
+        is_deleted,
+        id, category_id, tenant_id, `name`, subtitle, main_image, sub_images, detail, price, stock, show_in_host, show_in_top
+    </sql>
+
+    <select id="selectProductPage" resultMap="productResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM mall_product
+        WHERE is_deleted = 0
+    </select>
+
+</mapper>

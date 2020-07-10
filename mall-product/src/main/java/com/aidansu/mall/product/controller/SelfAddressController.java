@@ -47,7 +47,7 @@ public class SelfAddressController {
 	/**
 	 * 自定义分页 自提地址
 	 */
-	@GetMapping("/")
+	@GetMapping
 	@ApiOperation(value = "分页", notes = "传入selfAddress")
 	public R<IPage<SelfAddressVO>> page(SelfAddressVO selfAddress, Query query) {
 		IPage<SelfAddressVO> pages = selfAddressService.selectSelfAddressPage(Condition.getPage(query), selfAddress);

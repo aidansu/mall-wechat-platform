@@ -37,7 +37,7 @@ public class CodeGenerator {
 	/**
 	 * 需要生成的表名(两者只能取其一)
 	 */
-	public static String[] INCLUDE_TABLES = {"mall_self_address"};
+	public static String[] INCLUDE_TABLES = {"mall_product"};
 	/**
 	 * 需要排除的表名(两者只能取其一)
 	 */

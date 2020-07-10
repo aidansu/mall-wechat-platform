@@ -104,5 +104,31 @@ CREATE TABLE `mall_category` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品类别';
 
+-- ----------------------------
+-- Table structure for mall_product
+-- ----------------------------
+DROP TABLE IF EXISTS `mall_product`;
+CREATE TABLE `mall_product` (
+  `id` bigint(64) NOT NULL AUTO_INCREMENT COMMENT '商品id',
+  `category_id` bigint(64) NOT NULL COMMENT '分类id,对应mall_category表的主键',
+  `tenant_id` varchar(12) DEFAULT NULL COMMENT '租户ID',
+  `name` varchar(100) NOT NULL COMMENT '商品名称',
+  `subtitle` varchar(200) DEFAULT NULL COMMENT '商品副标题',
+  `main_image` varchar(500) DEFAULT NULL COMMENT '产品主图,url相对地址',
+  `sub_images` text COMMENT '图片地址,json格式,扩展用',
+  `detail` text COMMENT '商品详情',
+  `price` decimal(20,2) NOT NULL COMMENT '价格,单位-元保留两位小数',
+  `stock` int(11) NOT NULL COMMENT '库存数量',
+  `show_in_host` int(2) DEFAULT NULL COMMENT '是否热门：0=默认,1=热门',
+  `show_in_top` int(2) DEFAULT NULL COMMENT '是否置顶：0=默认,1=置顶',
+  `create_user` bigint(64) DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_user` bigint(64) DEFAULT NULL COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `status` int(2) DEFAULT NULL COMMENT '商品状态：0=下架,1=上架',
+  `is_deleted` int(2) DEFAULT NULL COMMENT '删除状态',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品';
+
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -135,8 +135,8 @@ public class GlobalRestExceptionTranslator {
     @ExceptionHandler(value = ApisException.class)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public R<String> apisExceptionResponse(ApisException exception) {
-        return R.fail(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
+    public R<String> apisExceptionResponse(ApisException e) {
+        return R.fail(e.getResultCode(), e.getMessage());
     }
 
 }

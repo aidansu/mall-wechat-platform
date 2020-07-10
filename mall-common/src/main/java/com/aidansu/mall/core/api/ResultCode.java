@@ -83,6 +83,11 @@ public enum ResultCode {
      * 参数校验失败
      */
     PARAM_VALID_ERROR(HttpServletResponse.SC_BAD_REQUEST, "参数校验失败"),
+
+    /**
+     * 商品下架或删除
+     */
+    PRODUCT_OFF_SALE_OR_DELETE(412, "商品下架或删除"),
     ;
 
     /**

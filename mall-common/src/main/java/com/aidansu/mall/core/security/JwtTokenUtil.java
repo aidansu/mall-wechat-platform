@@ -1,9 +1,7 @@
-package com.aidansu.mall.core.security.utils;
+package com.aidansu.mall.core.security;
 
 import com.aidansu.mall.core.api.ResultCode;
 import com.aidansu.mall.core.constant.TokenConstant;
-import com.aidansu.mall.core.security.AuthUserDetails;
-import com.aidansu.mall.core.security.TokenInfo;
 import com.aidansu.mall.core.security.exception.SecureException;
 import com.aidansu.mall.core.tool.utils.StringUtil;
 import com.aidansu.mall.core.tool.utils.WebUtil;

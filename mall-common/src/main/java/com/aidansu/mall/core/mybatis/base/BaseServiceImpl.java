@@ -3,7 +3,7 @@ package com.aidansu.mall.core.mybatis.base;
 import com.aidansu.mall.core.api.ResultCode;
 import com.aidansu.mall.core.security.AuthUserDetails;
 import com.aidansu.mall.core.security.exception.SecureException;
-import com.aidansu.mall.core.security.utils.JwtTokenUtil;
+import com.aidansu.mall.core.security.JwtTokenUtil;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

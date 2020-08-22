@@ -5,7 +5,7 @@ import com.aidansu.mall.core.api.ResultCode;
 import com.aidansu.mall.core.security.AuthUserDetails;
 import com.aidansu.mall.core.security.auth.PreAuth;
 import com.aidansu.mall.core.security.exception.SecureException;
-import com.aidansu.mall.core.security.utils.JwtTokenUtil;
+import com.aidansu.mall.core.security.JwtTokenUtil;
 import com.aidansu.mall.user.dto.AdminUserLoginDTO;
 import com.aidansu.mall.user.dto.WechatUserLoginDTO;
 import com.aidansu.mall.user.entity.User;

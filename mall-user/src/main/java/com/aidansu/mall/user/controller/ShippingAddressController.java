@@ -3,7 +3,7 @@ package com.aidansu.mall.user.controller;
 import com.aidansu.mall.core.api.R;
 import com.aidansu.mall.core.error.ApisException;
 import com.aidansu.mall.core.security.AuthUserDetails;
-import com.aidansu.mall.core.security.utils.JwtTokenUtil;
+import com.aidansu.mall.core.security.JwtTokenUtil;
 import com.aidansu.mall.core.tool.utils.Func;
 import com.aidansu.mall.user.entity.ShippingAddress;
 import com.aidansu.mall.user.service.IShippingAddressService;
@@ -12,7 +12,6 @@ import com.aidansu.mall.user.wrapper.ShippingAddressWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

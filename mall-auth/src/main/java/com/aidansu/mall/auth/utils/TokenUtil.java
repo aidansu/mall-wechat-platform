@@ -3,7 +3,7 @@ package com.aidansu.mall.auth.utils;
 import com.aidansu.mall.core.constant.TokenConstant;
 import com.aidansu.mall.auth.entity.AuthInfo;
 import com.aidansu.mall.auth.entity.UserInfo;
-import com.aidansu.mall.core.security.utils.JwtTokenUtil;
+import com.aidansu.mall.core.security.JwtTokenUtil;
 import com.aidansu.mall.core.security.TokenInfo;
 
 import java.util.HashMap;
